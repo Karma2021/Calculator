@@ -1,0 +1,121 @@
+from tkinter import *
+
+window = Tk()
+window.title("Calculator")
+window.iconbitmap("calculator1.ico")
+window.maxsize(width = 350, height = 532)
+window.minsize(width = 350, height = 532)
+window.configure(bg = "#141414")
+
+def printing_button(to_print):
+        Input = entry.get()
+        entry.delete(0, END)
+        entry.insert(0, Input + to_print)
+
+def click(event):
+    text = event.widget.cget("text")
+    # c.get == get the text from the widget
+    print(text)
+
+    if text == "=":
+        if entry_value.get().isdigit():
+            value = int(entry_value.get())
+        else:
+            try:
+                value = eval(entry.get())
+            except Exception as error:
+                print(error)
+                value = "Error"
+
+        entry_value.set(value)
+        entry.update()
+    elif text == "C":
+        entry.delete(0, END)
+    elif text == "⌫":
+        current = entry.get()
+        length = len(current) - 1
+        entry.delete(length, END)
+    else:
+        entry_value.set(entry_value.get() + text)
+        entry.update()
+
+entry_value = StringVar()
+entry_value.set("")
+entry = Entry(window, font = "helvetica 20", textvar = entry_value, borderwidth = 12, width = 20, bg = "black", fg = "#f50000")
+entry.grid(row = 1, column = 0, columnspan = 4, padx = 5, pady = 17)
+
+square_button = Button(window, text = "^", font = "helvetica 25", bg = "#fffacd", padx = 22, pady = 10, command = lambda: printing_button("**"))
+modulo_button = Button(window, text = "%", font = "helvetica 25", bg = "#fffacd", padx = 14, pady = 10)
+backspace_button = Button(window, text = "⌫", font = "helvetica 25", bg = "#fffacd", padx = 7, pady = 10)
+clear_button = Button(window, text = "C", font = "helvetica 25", bg = "#fffacd", padx = 18, pady = 10)
+
+square_button.grid(row = 3, column = 0, padx =1, pady =1)
+modulo_button.grid(row = 3, column = 1, padx =2, pady = 1)
+backspace_button.grid(row = 3, column = 2, padx =1, pady = 1)
+clear_button.grid(row = 3, column = 3, padx = 2, pady = 2)
+
+
+button_7 = Button(window, text = "7", font = "helvetica 25", padx = 20, pady = 10)
+button_8 = Button(window, text = "8", font = "helvetica 25", padx = 19, pady = 10)
+button_9 = Button(window, text = "9", font = "helvetica 25", padx = 19, pady = 10)
+division_button = Button(window, text = "÷", font = "helvetica 25", bg = "#fffacd", padx = 20, pady = 10, command = lambda: printing_button("/"))
+
+button_7.grid(row = 4, column = 0, padx = 1, pady = 1)
+button_8.grid(row = 4, column = 1, padx = 1, pady =1)
+button_9.grid(row = 4, column = 2, padx =1, pady =1)
+division_button.grid(row = 4, column = 3, padx = 1, pady =1)
+
+
+button_4 = Button(window, text = "4", font = "helvetica 25", padx = 20, pady = 10)
+button_5 = Button(window, text = "5", font = "helvetica 25", padx = 19, pady = 10)
+button_6 = Button(window, text = "6", font = "helvetica 25", padx = 19, pady = 10)
+multiplication_button = Button(window, text = "x", font = "helvetica 25", bg = "#fffacd", padx = 22, pady = 10, command = lambda: printing_button("*"))
+
+button_4.grid(row = 5, column = 0, padx = 1, pady =1)
+button_5.grid(row = 5, column = 1, padx = 1, pady =1)
+button_6.grid(row = 5, column = 2, padx = 1, pady =1)
+multiplication_button.grid(row = 5, column = 3, padx = 1, pady =2)
+
+
+button_1 = Button(window, text = "1", font = "helvetica 25", padx = 20, pady = 10)
+button_2 = Button(window, text = "2", font = "helvetica 25", padx = 19, pady = 10)
+button_3 = Button(window, text = "3", font = "helvetica 25", padx = 19, pady = 10)
+subtraction_button = Button(window, text = "-", font = "helvetica 25", bg = "#fffacd", padx = 23, pady = 10)
+
+button_1.grid(row = 6, column = 0, padx = 1, pady =1)
+button_2.grid(row = 6, column = 1, padx = 1, pady =1)
+button_3.grid(row = 6, column = 2, padx = 1, pady =1)
+subtraction_button.grid(row = 6, column = 3, padx = 1, pady =1)
+
+
+equal_button = Button(window, text = "=", font = "helvetica 25", bg = "#ffb347", padx = 20, pady = 10)
+button_0 = Button(window, text = "0", font = "helvetica 25", padx = 19, pady = 10)
+dot_button = Button(window, text = ".", font = "helvetica 25", padx = 23, pady = 10)
+addition_button = Button(window, text = "+", font = "helvetica 25", bg = "#fffacd", padx = 19, pady = 10)
+
+equal_button.grid(row = 7, column = 0, padx = 1, pady = 1)
+button_0.grid(row = 7, column = 1, padx = 1, pady = 1)
+dot_button.grid(row = 7, column = 2, padx = 1, pady =1)
+addition_button.grid(row = 7, column = 3, padx = 1, pady =2)
+
+
+# binding button
+modulo_button.bind("<Button-1>", click)
+backspace_button.bind("<Button-1>", click)
+clear_button.bind("<Button-1>", click)
+button_7.bind("<Button-1>", click)
+button_8.bind("<Button-1>", click)
+button_9.bind("<Button-1>", click)
+button_4.bind("<Button-1>", click)
+button_5.bind("<Button-1>", click)
+button_6.bind("<Button-1>", click)
+button_1.bind("<Button-1>", click)
+button_2.bind("<Button-1>", click)
+button_3.bind("<Button-1>", click)
+subtraction_button.bind("<Button-1>", click)
+equal_button.bind("<Button-1>", click)
+button_0.bind("<Button-1>", click)
+dot_button.bind("<Button-1>", click)
+addition_button.bind("<Button-1>", click)
+
+window.mainloop()
